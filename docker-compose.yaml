@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  backend:
+    image: webapp:v1
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=True
+
+  frontend:
+    image: frontapp:v1
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    environment:
+      - REACT_APP_API_URL=http://backend:8000    
+    depends_on:
+      - backend
+
+
