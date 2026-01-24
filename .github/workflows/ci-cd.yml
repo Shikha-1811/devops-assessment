@@ -10,12 +10,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout code
+      # Checkout repo
       - name: Checkout code
         uses: actions/checkout@v4
 
       # Log in to Docker Hub
-      - name: Log in to Docker Hub
+      - name: Docker login
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
@@ -46,8 +46,9 @@ jobs:
           key: ${{ secrets.VM_SSH_KEY }}
           port: ${{ secrets.VM_PORT }}
           script: |
-            cd /vagrant/your-project-path  # Change this to the path of your project inside VM
+            cd /vagrant/your-project-path
             docker pull ${{ secrets.DOCKER_USERNAME }}/backend:v1
             docker pull ${{ secrets.DOCKER_USERNAME }}/frontend:v1
             docker-compose up -d
             docker ps
+
