@@ -32,14 +32,14 @@ jobs:
       # 4️⃣ Push backend image to Docker Hub
       - name: Push backend image
         run: |
-          docker tag backend:latest ${{ secrets.DOCKER_USERNAME }}/backend:v1
-          docker push ${{ secrets.DOCKER_USERNAME }}/backend:v1
+          docker tag backend:latest ${{ secrets.DOCKERHUB_USERNAME }}/backend:v1
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/backend:v1
 
       # 5️⃣ Push frontend image to Docker Hub
       - name: Push frontend image
         run: |
-          docker tag frontend:latest ${{ secrets.DOCKER_USERNAME }}/frontend:v1
-          docker push ${{ secrets.DOCKER_USERNAME }}/frontend:v1
+          docker tag frontend:latest ${{ secrets.DOCKERHUB_USERNAME }}/frontend:v1
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/frontend:v1
 
       # 6️⃣ Deploy to Vagrant VM
       - name: Deploy to Vagrant VM
@@ -51,8 +51,8 @@ jobs:
           port: ${{ secrets.VM_PORT }}
           script: |
             cd /vagrant/devops-assessment   # <-- change this if your project path inside VM is different
-            docker pull ${{ secrets.DOCKER_USERNAME }}/backend:v1
-            docker pull ${{ secrets.DOCKER_USERNAME }}/frontend:v1
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/backend:v1
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/frontend:v1
             docker-compose up -d
             docker ps
 
