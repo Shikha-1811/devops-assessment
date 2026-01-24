@@ -60,3 +60,4 @@ A simple "Hello World" full-stack application built with **Django** (Backend) an
 - **Responsive Design**: Custom CSS ensures the application looks premium on all screen sizes and supports dark mode.
 # test
 # test
+# test
