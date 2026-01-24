@@ -59,3 +59,4 @@ A simple "Hello World" full-stack application built with **Django** (Backend) an
 - **CORS**: Configured in Django to allow the React frontend to fetch data during local development.
 - **Responsive Design**: Custom CSS ensures the application looks premium on all screen sizes and supports dark mode.
 # test
+# test
