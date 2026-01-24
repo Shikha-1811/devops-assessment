@@ -6,10 +6,11 @@ on:
       - main
 
 jobs:
-  build-and-push:
+  build-push-deploy:
     runs-on: ubuntu-latest
 
     steps:
+      # Checkout code
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -36,10 +37,17 @@ jobs:
           docker tag frontend:latest ${{ secrets.DOCKER_USERNAME }}/frontend:v1
           docker push ${{ secrets.DOCKER_USERNAME }}/frontend:v1
 
-      # Start containers locally (for testing only)
-      - name: Start containers
-        run: docker compose up -d
-
-      - name: Show running containers
-        run: docker ps
-
+      # Deploy to Vagrant VM
+      - name: Deploy to Vagrant VM
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.VM_HOST }}
+          username: ${{ secrets.VM_USER }}
+          key: ${{ secrets.VM_SSH_KEY }}
+          port: ${{ secrets.VM_PORT }}
+          script: |
+            cd /vagrant/your-project-path  # Change this to the path of your project inside VM
+            docker pull ${{ secrets.DOCKER_USERNAME }}/backend:v1
+            docker pull ${{ secrets.DOCKER_USERNAME }}/frontend:v1
+            docker-compose up -d
+            docker ps
