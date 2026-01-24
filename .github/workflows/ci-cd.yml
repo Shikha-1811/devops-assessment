@@ -32,13 +32,13 @@ jobs:
       # 4️⃣ Push backend image to Docker Hub
       - name: Push backend image
         run: |
-          docker tag backend:latest ${{ secrets.DOCKERHUB_USERNAME }}/backend:v1
+          docker tag webapp:v1 ${{ secrets.DOCKERHUB_USERNAME }}/backend:v1
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/backend:v1
 
       # 5️⃣ Push frontend image to Docker Hub
       - name: Push frontend image
         run: |
-          docker tag frontend:latest ${{ secrets.DOCKERHUB_USERNAME }}/frontend:v1
+          docker tag frontapp:v1 ${{ secrets.DOCKERHUB_USERNAME }}/frontend:v1
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/frontend:v1
 
       # 6️⃣ Deploy to Vagrant VM
