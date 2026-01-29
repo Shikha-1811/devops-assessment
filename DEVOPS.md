@@ -109,6 +109,13 @@ cd devops-assessment
 * Push images to Docker Hub
 * Deploy application on Vagrant VM using self-hosted runner
 
+### 🔹 Why Self-Hosted Runner Is Used
+
+In this project, a self-hosted GitHub Actions runner is used because the deployment target is a local Vagrant-based virtual machine, which is not directly accessible from GitHub-hosted runners. GitHub-hosted runners run in GitHub-managed infrastructure and cannot connect to private or local environments.
+
+To solve this, the self-hosted runner was installed directly inside the Vagrant VM. This allows GitHub Actions to execute deployment steps such as Docker image pulling and Docker Compose commands directly on the target server. As a result, the CI/CD pipeline can automatically deploy the application whenever code is pushed to the main branch.
+
+
 ---
 
 ### GitHub Secrets Configuration
